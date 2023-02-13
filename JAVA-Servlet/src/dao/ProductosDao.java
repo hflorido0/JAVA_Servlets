@@ -6,16 +6,15 @@ import java.util.Random;
 import model.Producto;
 
 public class ProductosDao {
-	private static ProductosDao productoDao;
 	
 	public ProductosDao() {
+		Class.forName("com.mysql.cj.jdbc.Driver")
+		url =  Constants.DB_URL_CONNECTION;
+		user = Constants.DB_USER_CONNECTION;
+		pass = Constants.DB_PASS_CONNECTION;
+		Connection conexion = DriverManager.getConnection(url, user, pass);
 		
-	}
-
-	public static ProductosDao getInstance() {
-		if (productoDao == null) 
-			productoDao = new ProductosDao();
-		return productoDao;
+		conexion.setAutoCommit(false);
 	}
 
 	public ArrayList<Producto> getProductos() {
